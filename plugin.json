@@ -1,0 +1,22 @@
+{
+    "id": "pelican-advanced-metrics",
+    "name": "Advanced Server Metrics",
+    "author": "MrPanica",
+    "version": "1.0.9",
+    "description": "Historical metric charts (CPU, RAM, Disk, Network, Source Engine Players, Tickrate) with timeframes (1m, 1h, 1d, 1w, 1mo), click-to-expand modals, and configurable retention limit for Pelican Panel.",
+    "category": "plugin",
+    "url": "https://github.com/MrPanica/pelican-advanced-metrics",
+    "update_url": "",
+    "namespace": "Artur\\PelicanAdvancedMetrics",
+    "class": "PelicanAdvancedMetricsPlugin",
+    "panels": [
+        "server",
+        "admin"
+    ],
+    "panel_version": null,
+    "composer_packages": null,
+    "meta": {
+        "status": "enabled",
+        "status_message": null
+    }
+}
