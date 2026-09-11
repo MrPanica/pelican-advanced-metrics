@@ -6,6 +6,25 @@ A comprehensive analytics and historical telemetry plugin for **Pelican Panel**,
 
 ---
 
+## 📸 Screenshots / Скриншоты
+
+### Historical Metrics & Comparative Analysis Modal / Модальное окно истории и аналитики
+![Advanced Metrics — History Modal](screenshots/01_advanced_metrics_modal.png)
+*Interactive multi-metric telemetry explorer with timeframe filters (10s to 1 month) and calculated min/avg/max values.*  
+*Интерактивное модальное окно истории метрик с фильтрами периодов (от 10 сек до 1 месяца) и подсчетом минимума, максимума и среднего значения.*
+
+### Real-Time Metric Charts on Server Dashboard / Графики метрик в реальном времени
+![Advanced Metrics — Charts](screenshots/02_advanced_metrics_charts.png)
+*Live telemetry graphs for CPU, Memory, Players, Network throughput, and Disk storage.*  
+*Живые графики телеметрии процессора, оперативной памяти, онлайна игроков, сетевого трафика и дискового пространства.*
+
+> [!NOTE]
+> **Dashboard Layout Notice / Оформление страницы сервера:**  
+> The 2-column dashboard layout, compact top status bar, map badge, and console viewport shown in this screenshot are provided by the [**Pelican Server Layout Pro**](https://github.com/MrPanica/pelican-server-layout-pro) plugin.  
+> *Двухколоночный макет страницы сервера, компактный статус-бар в шапке, бейдж текущей карты и окно консоли обеспечиваются отдельным плагином [**Pelican Server Layout Pro**](https://github.com/MrPanica/pelican-server-layout-pro).*
+
+---
+
 ## ✨ Features (English)
 
 - **Comprehensive Historical Metric Tracking**:
