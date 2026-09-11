@@ -30,6 +30,7 @@ class PelicanAdvancedMetricsProvider extends ServiceProvider
 
     public function boot(): void
     {
+        $this->loadTranslationsFrom(__DIR__ . '/../../lang', 'advanced-metrics');
         $this->loadMigrationsFrom(__DIR__ . '/../../database/migrations');
         $this->loadViewsFrom(__DIR__ . '/../../resources/views', 'advanced-metrics');
 

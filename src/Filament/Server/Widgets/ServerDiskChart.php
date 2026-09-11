@@ -57,7 +57,7 @@ class ServerDiskChart extends ChartWidget
         return [
             'datasets' => [
                 [
-                    'label' => 'Диск (MB)',
+                    'label' => __('advanced-metrics::messages.chart_disk_mb'),
                     'data' => $data,
                     'borderColor' => '#10b981',
                     'backgroundColor' => 'rgba(16, 185, 129, 0.25)',
@@ -118,6 +118,6 @@ class ServerDiskChart extends ChartWidget
         $disk = (int) collect(cache()->get("servers.{$server->id}.disk_bytes"))->last(default: 0);
         $used = $disk > 0 ? convert_bytes_to_readable($disk) : '0 MB';
 
-        return "Диск - $used";
+        return __('advanced-metrics::messages.disk') . " - $used";
     }
 }

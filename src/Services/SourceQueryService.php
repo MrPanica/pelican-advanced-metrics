@@ -232,7 +232,7 @@ class SourceQueryService
 
             $name = self::cleanString($rawName);
             if ($name === '') {
-                $name = 'Подключается...';
+                $name = __('advanced-metrics::messages.connecting');
             }
 
             $durInt = max(0, (int) round($duration));

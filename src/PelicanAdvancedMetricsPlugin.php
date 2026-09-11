@@ -17,17 +17,23 @@ class PelicanAdvancedMetricsPlugin implements Plugin
     public function register(Panel $panel): void
     {
         if ($panel->getId() === 'server') {
-            $version = '1.0.8';
+            $version = '1.0.10';
 
             $panel->renderHook(
                 PanelsRenderHook::HEAD_END,
-                fn () => new HtmlString('<link rel="stylesheet" href="/plugins/pelican-advanced-metrics/css/advanced-metrics.css?v=' . $version . '">')
+                function () use ($version) {
+                    $i18n = trans('advanced-metrics::messages');
+                    return new HtmlString(
+                        '<link rel="stylesheet" href="/plugins/pelican-advanced-metrics/css/advanced-metrics.css?v=' . $version . '">' . "\n" .
+                        '<script>window.PelicanAdvancedMetricsI18n = ' . json_encode($i18n) . ';</script>'
+                    );
+                }
             );
 
             $panel->renderHook(
                 PanelsRenderHook::BODY_END,
                 fn () => new HtmlString(
-                    '<script src="/plugins/pelican-advanced-metrics/js/chart.umd.min.js?v=' . $version . '"></script>' .
+                    '<script src="/plugins/pelican-advanced-metrics/js/chart.umd.min.js?v=' . $version . '"></script>' . "\n" .
                     '<script src="/plugins/pelican-advanced-metrics/js/advanced-metrics.js?v=' . $version . '" defer></script>'
                 )
             );

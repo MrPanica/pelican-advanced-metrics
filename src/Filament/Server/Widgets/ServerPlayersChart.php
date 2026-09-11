@@ -75,7 +75,7 @@ class ServerPlayersChart extends ChartWidget
         return [
             'datasets' => [
                 [
-                    'label' => 'Игроки онлайн',
+                    'label' => __('advanced-metrics::messages.players_online'),
                     'data' => $data,
                     'borderColor' => '#f59e0b',
                     'backgroundColor' => 'rgba(245, 158, 11, 0.25)',
@@ -134,6 +134,6 @@ class ServerPlayersChart extends ChartWidget
         $server = $this->server ?? Filament::getTenant();
         $players = $this->getLivePlayerCount($server);
 
-        return "Игроки онлайн - $players";
+        return __('advanced-metrics::messages.players_online') . " - $players";
     }
 }

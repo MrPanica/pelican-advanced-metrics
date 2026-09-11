@@ -3,6 +3,11 @@
  * Version 1.0.7
  */
 (function () {
+    const i18n = window.PelicanAdvancedMetricsI18n || {};
+    function __(key, fallback) {
+        return (i18n && typeof i18n[key] === 'string') ? i18n[key] : fallback;
+    }
+
     let currentRange = '1h';
     let selectedMetrics = new Set(['cpu']); // multi-select set
     let modalChartInstance = null;
@@ -12,7 +17,7 @@
     const METRIC_CONFIG = {
         cpu: {
             id: 'cpu',
-            label: 'Процессор (CPU)',
+            label: __('chart_cpu_label', 'Процессор (CPU)'),
             color: '#38bdf8',
             unit: '%',
             yAxisID: 'y_cpu',
@@ -21,16 +26,16 @@
         },
         players: {
             id: 'players',
-            label: 'Игроки онлайн',
+            label: __('chart_players_label', 'Игроки онлайн'),
             color: '#f59e0b',
-            unit: 'игр.',
+            unit: __('unit_players', 'игр.'),
             yAxisID: 'y_players',
             getValue: (d) => parseInt(d.players || 0),
-            formatVal: (v) => Math.round(v) + ' чел'
+            formatVal: (v) => Math.round(v) + ' ' + __('unit_players_full', 'чел')
         },
         memory: {
             id: 'memory',
-            label: 'Память (RAM)',
+            label: __('chart_memory_label', 'Память (RAM)'),
             color: '#a855f7',
             unit: 'MB',
             yAxisID: 'y_memory',
@@ -39,7 +44,7 @@
         },
         network: {
             id: 'network',
-            label: 'Сеть (Трафик)',
+            label: __('chart_network_label', 'Сеть (Трафик)'),
             color: '#06b6d4',
             unit: 'KB/s',
             yAxisID: 'y_network',
@@ -48,7 +53,7 @@
         },
         disk: {
             id: 'disk',
-            label: 'Диск',
+            label: __('chart_disk_label', 'Диск'),
             color: '#10b981',
             unit: 'MB',
             yAxisID: 'y_disk',
@@ -92,7 +97,7 @@
             btn.type = 'button';
             btn.className = 'pelican-chart-expand-btn';
             btn.setAttribute('data-metric', detectedMetric);
-            btn.setAttribute('title', 'Развернуть график и историю');
+            btn.setAttribute('title', __('expand_chart_history', 'Развернуть график и историю'));
             btn.innerHTML = `
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
                     <polyline points="15 3 21 3 21 9"></polyline>
@@ -129,7 +134,7 @@
                 <div class="pm-modal-header">
                     <div class="pm-modal-header-left">
                         <span class="pm-modal-icon">📈</span>
-                        <h3>История метрик и сравнительный график</h3>
+                        <h3>${__('metrics_history_title', 'История метрик и сравнительный график')}</h3>
                     </div>
                     <button type="button" class="pm-modal-close" id="pm-modal-close-btn">&times;</button>
                 </div>
@@ -137,7 +142,7 @@
                 <div class="pm-modal-toolbar">
                     <!-- Overlay Metrics Selector (Multi-check) -->
                     <div class="pm-metrics-selector-wrap">
-                        <span class="pm-sel-label">Отображать метрики (наложение):</span>
+                        <span class="pm-sel-label">${__('show_metrics_overlay', 'Отображать метрики (наложение):')}</span>
                         <div class="pm-metric-checkboxes">
                             <label class="pm-check-label color-cpu">
                                 <input type="checkbox" data-metric="cpu" checked>
@@ -145,31 +150,31 @@
                             </label>
                             <label class="pm-check-label color-players">
                                 <input type="checkbox" data-metric="players">
-                                <span class="pm-chk-badge">Игроки онлайн</span>
+                                <span class="pm-chk-badge">${__('players_online', 'Игроки онлайн')}</span>
                             </label>
                             <label class="pm-check-label color-memory">
                                 <input type="checkbox" data-metric="memory">
-                                <span class="pm-chk-badge">Память (RAM)</span>
+                                <span class="pm-chk-badge">${__('chart_memory_label', 'Память (RAM)')}</span>
                             </label>
                             <label class="pm-check-label color-network">
                                 <input type="checkbox" data-metric="network">
-                                <span class="pm-chk-badge">Сеть</span>
+                                <span class="pm-chk-badge">${__('network', 'Сеть')}</span>
                             </label>
                             <label class="pm-check-label color-disk">
                                 <input type="checkbox" data-metric="disk">
-                                <span class="pm-chk-badge">Диск</span>
+                                <span class="pm-chk-badge">${__('disk', 'Диск')}</span>
                             </label>
                         </div>
                     </div>
 
                     <!-- Range Selector with 10s -->
                     <div class="pm-range-selector">
-                        <button type="button" class="pm-range-btn" data-range="10s">10 сек</button>
-                        <button type="button" class="pm-range-btn" data-range="1m">1 мин</button>
-                        <button type="button" class="pm-range-btn active" data-range="1h">1 час</button>
-                        <button type="button" class="pm-range-btn" data-range="1d">1 день</button>
-                        <button type="button" class="pm-range-btn" data-range="1w">1 неделя</button>
-                        <button type="button" class="pm-range-btn" data-range="1mo">1 месяц</button>
+                        <button type="button" class="pm-range-btn" data-range="10s">${__('range_10s', '10 сек')}</button>
+                        <button type="button" class="pm-range-btn" data-range="1m">${__('range_1m', '1 мин')}</button>
+                        <button type="button" class="pm-range-btn active" data-range="1h">${__('range_1h', '1 час')}</button>
+                        <button type="button" class="pm-range-btn" data-range="1d">${__('range_1d', '1 день')}</button>
+                        <button type="button" class="pm-range-btn" data-range="1w">${__('range_1w', '1 неделя')}</button>
+                        <button type="button" class="pm-range-btn" data-range="1mo">${__('range_1mo', '1 месяц')}</button>
                     </div>
                 </div>
 
@@ -337,7 +342,7 @@
                 statBox.style.borderLeft = `3px solid ${conf.color}`;
                 statBox.innerHTML = `
                     <span class="label" style="color:${conf.color}">${conf.label}</span>
-                    <span class="value">${conf.formatVal(cur)} <small style="color:#64748b">(мин: ${conf.formatVal(min)}, макс: ${conf.formatVal(max)})</small></span>
+                    <span class="value">${conf.formatVal(cur)} <small style="color:#64748b">(${__('min', 'мин')}: ${conf.formatVal(min)}, ${__('max', 'макс')}: ${conf.formatVal(max)})</small></span>
                 `;
                 statsBar.appendChild(statBox);
             }
@@ -389,9 +394,9 @@
                     color: '#f59e0b',
                     stepSize: 1,
                     precision: 0,
-                    callback: (v) => Number.isInteger(v) ? v + ' игр.' : ''
+                    callback: (v) => Number.isInteger(v) ? v + ' ' + __('unit_players', 'игр.') : ''
                 },
-                title: { display: true, text: 'Игроки', color: '#f59e0b', font: { size: 10, weight: 'bold' } }
+                title: { display: true, text: __('players', 'Игроки'), color: '#f59e0b', font: { size: 10, weight: 'bold' } }
             };
             if (!primaryLeftSet) primaryLeftSet = true;
         }
@@ -406,7 +411,7 @@
                     color: '#a855f7',
                     callback: (v) => v >= 1024 ? (v / 1024).toFixed(1) + ' GB' : v + ' MB'
                 },
-                title: { display: true, text: 'Память', color: '#a855f7', font: { size: 10, weight: 'bold' } }
+                title: { display: true, text: __('memory', 'Память'), color: '#a855f7', font: { size: 10, weight: 'bold' } }
             };
             if (!primaryLeftSet) primaryLeftSet = true;
         }
@@ -416,12 +421,12 @@
                 type: 'linear',
                 position: !primaryLeftSet ? 'left' : 'right',
                 min: 0,
-                grid: { drawOnChartArea: !primaryLeftSet, color: 'rgba(16, 185, 129, 0.06)' },
+                grid: { drawOnChartArea: !primaryLeftSet, color: 'rgba(168, 85, 247, 0.06)' },
                 ticks: {
                     color: '#10b981',
                     callback: (v) => v >= 1024 ? (v / 1024).toFixed(1) + ' GB' : v + ' MB'
                 },
-                title: { display: true, text: 'Диск', color: '#10b981', font: { size: 10, weight: 'bold' } }
+                title: { display: true, text: __('disk', 'Диск'), color: '#10b981', font: { size: 10, weight: 'bold' } }
             };
             if (!primaryLeftSet) primaryLeftSet = true;
         }
@@ -436,7 +441,7 @@
                     color: '#06b6d4',
                     callback: (v) => v >= 1024 ? (v / 1024).toFixed(1) + ' MB/s' : v + ' KB/s'
                 },
-                title: { display: true, text: 'Сеть', color: '#06b6d4', font: { size: 10, weight: 'bold' } }
+                title: { display: true, text: __('network', 'Сеть'), color: '#06b6d4', font: { size: 10, weight: 'bold' } }
             };
             if (!primaryLeftSet) primaryLeftSet = true;
         }
@@ -466,13 +471,13 @@
                             label: function (ctx) {
                                 const ds = ctx.dataset;
                                 const val = ctx.parsed.y;
-                                if (ds.label.includes('Игрок')) {
-                                    return ds.label + ': ' + Math.round(val) + ' чел';
+                                if (ds.yAxisID === 'y_players' || ds.label.includes('Игрок') || ds.label.includes('Player')) {
+                                    return ds.label + ': ' + Math.round(val) + ' ' + __('unit_players_full', 'чел');
                                 } else if (ds.label.includes('CPU')) {
                                     return ds.label + ': ' + val.toFixed(1) + ' %';
-                                } else if (ds.label.includes('Диск') || ds.label.includes('Память')) {
+                                } else if (ds.label.includes('Диск') || ds.label.includes('Disk') || ds.label.includes('Память') || ds.label.includes('Memory')) {
                                     return ds.label + ': ' + (val >= 1024 ? (val / 1024).toFixed(2) + ' GB' : val.toFixed(1) + ' MB');
-                                } else if (ds.label.includes('Сеть')) {
+                                } else if (ds.label.includes('Сеть') || ds.label.includes('Network')) {
                                     return ds.label + ': ' + (val >= 1024 ? (val / 1024).toFixed(2) + ' MB/s' : val.toFixed(1) + ' KB/s');
                                 }
                                 return ds.label + ': ' + val;
