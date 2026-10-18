@@ -1,6 +1,6 @@
 {
     "*": {
-        "version": "1.0.10",
+        "version": "1.0.11",
         "download_url": "https://github.com/MrPanica/pelican-advanced-metrics/archive/refs/heads/master.zip",
         "changelog": "Added bilingual localization (ru/en) tied to Pelican Panel locale, update_url and 1-click URL installation."
     }

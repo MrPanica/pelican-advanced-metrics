@@ -11,6 +11,8 @@ use Illuminate\Support\Carbon;
 
 class ServerDiskChart extends ChartWidget
 {
+    protected static bool $isLazy = false;
+
     protected ?string $pollingInterval = '5s';
 
     protected ?string $maxHeight = '200px';

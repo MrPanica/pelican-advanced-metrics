@@ -17,7 +17,7 @@ class PelicanAdvancedMetricsPlugin implements Plugin
     public function register(Panel $panel): void
     {
         if ($panel->getId() === 'server') {
-            $version = '1.0.10';
+            $version = '1.0.11';
 
             $panel->renderHook(
                 PanelsRenderHook::HEAD_END,

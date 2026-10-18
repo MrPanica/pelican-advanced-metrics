@@ -12,6 +12,8 @@ use Illuminate\Support\Carbon;
 
 class ServerPlayersChart extends ChartWidget
 {
+    protected static bool $isLazy = false;
+
     protected ?string $pollingInterval = '15s';
 
     protected ?string $maxHeight = '200px';
